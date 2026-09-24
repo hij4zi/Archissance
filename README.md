@@ -416,17 +416,29 @@ Set in `build/partials.mjs` → `SITE`:
       still drifts). The deployed site's real `<source>` files play in Safari fine.
 - [ ] **Domain** — `archissance.com` assumed for `<link rel="canonical">` / Open Graph. Confirm.
 - [ ] **Contact form** — posts to `/api/contact` (`build/contact-handler.mjs`),
-      which sends through GoDaddy Node.js Hosting's built-in email gateway
-      (`build/email.mjs`). **Set `CONTACT_FORM_RECIPIENT_EMAIL`** (e.g.
-      `samir@archissance.com`) as an environment variable in the Node.js
-      Hosting UI — the handler fails closed (500, generic message, no
-      submissions silently dropped) if it's unset. Works with JS disabled
-      (native form POST → 303 redirect to `contact.html?sent=1|0`) and is
-      progressively enhanced by `assets/js/main.js` (fetch + inline status
-      message) when JS is available. Locally, the gateway at
-      `127.0.0.1:2525` only exists inside a GoDaddy container, so a real
-      send always fails with "email gateway unreachable" — that's expected;
-      the route's validation/response logic still exercises correctly.
+      which records every enquiry through two independent, best-effort
+      channels so neither one's failure loses a submission (the request only
+      fails if BOTH fail):
+      - **Email**, through GoDaddy Node.js Hosting's built-in gateway
+        (`build/email.mjs`). **Set `CONTACT_FORM_RECIPIENT_EMAIL`** (e.g.
+        `samir@archissance.com`) as an environment variable in the Node.js
+        Hosting UI — with it unset, no email is sent (logged server-side),
+        but a submission still succeeds if the DB save below works.
+      - **A durable row in GoDaddy managed MySQL** (`build/db.mjs`, table
+        `enquiries`, auto-created on first use). **Enable managed MySQL** for
+        this app in the Node.js Hosting UI so the platform injects
+        `DB_HOST` / `DB_PORT` / `DB_NAME` / `DB_USER` / `DB_PASSWORD` — with
+        those unset, the DB save is skipped (logged server-side).
+
+      Works with JS disabled (native form POST → 303 redirect to
+      `contact.html?sent=1|0`) and is progressively enhanced by
+      `assets/js/main.js` (fetch + inline status message) when JS is
+      available. Locally, neither the email gateway (`127.0.0.1:2525`) nor a
+      real managed-MySQL instance exists outside a GoDaddy container, so both
+      channels fail as expected ("email gateway unreachable" /
+      "database not configured") — that's fine; the route's validation and
+      response logic still exercises correctly. **Both env-var groups need
+      to be set once deployed**, or enquiries have nowhere to go.
 - [x] **Project data** — titles, locations, clients, statuses, years and the seven
       supplied project descriptions reconciled to the studio's revision-2
       source-of-truth list (`data/projects.json`). `summary`/`body` for Bellflower,

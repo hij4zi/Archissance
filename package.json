@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "playwright": "^1.62.1"
+  },
+  "dependencies": {
+    "mysql2": "^3.24.4"
   }
 }
