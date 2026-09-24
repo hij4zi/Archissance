@@ -3,6 +3,11 @@ build/shots/
 .DS_Store
 *.log
 
+# secrets — never committed; set via the GoDaddy Hosting UI's env vars /
+# Import .env feature instead
+.env
+.env.*
+
 # session revert-copies — never referenced by the live site, pure scratch
 build/_backup-*/
 
