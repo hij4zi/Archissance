@@ -3,6 +3,13 @@
    which makes <video> report seekable=[0,0]). Real static hosts
    (Netlify / Vercel / S3 / nginx / Cloudflare) all support Range.
 
+   This is also the production entry point (package.json "start"): GoDaddy
+   Node.js Hosting sets PORT and expects the app to bind 0.0.0.0 so its
+   reverse proxy can reach it — an explicit CLI arg still wins locally
+   (node build/serve.mjs 4180) for scripts that need a fixed port (qa.mjs,
+   routetest.mjs), and otherwise falls back to PORT, then 4180 for plain
+   local runs.
+
    node build/serve.mjs [port]            ->  http://127.0.0.1:4180
 */
 import { createServer } from "node:http";
@@ -11,7 +18,10 @@ import { join, extname, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(fileURLToPath(new URL(".", import.meta.url)), "..");
-const PORT = Number(process.argv[2]) || 4180;
+const PORT = Number(process.argv[2]) || Number(process.env.PORT) || 4180;
+// 0.0.0.0 always — GoDaddy's reverse proxy needs it in production, and it's
+// still reachable at 127.0.0.1 locally (a wildcard bind answers both).
+const HOST = "0.0.0.0";
 const MIME = {
   ".html": "text/html", ".css": "text/css", ".js": "text/javascript",
   ".mjs": "text/javascript", ".json": "application/json", ".svg": "image/svg+xml",
@@ -54,4 +64,4 @@ createServer((req, res) => {
     });
     createReadStream(file).pipe(res);
   }
-}).listen(PORT, "127.0.0.1", () => console.log(`serving ${ROOT}\n-> http://127.0.0.1:${PORT}  (Range-enabled)`));
+}).listen(PORT, HOST, () => console.log(`serving ${ROOT}\n-> http://127.0.0.1:${PORT}  (Range-enabled)`));

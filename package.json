@@ -4,10 +4,15 @@
   "private": true,
   "description": "Archissance Design Group — studio website. Static HTML/CSS/JS, generated from build/.",
   "type": "module",
+  "main": "build/serve.mjs",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "node build/build.mjs",
+    "start": "node build/serve.mjs",
     "images": "python build/process_images.py",
-    "serve": "node --run build && npx --yes serve@14 .",
+    "serve": "node --run build && node build/serve.mjs",
     "standalone": "node build/build.mjs && node build/standalone.mjs"
   },
   "devDependencies": {
