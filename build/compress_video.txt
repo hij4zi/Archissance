@@ -1,0 +1,20 @@
+Fly-through video — source to web
+=================================
+
+Source: ANIMATION-REVISIOV-5-HD.mp4  (1280x720, 30fps, 2:02, ~390 MB, near-lossless)
+
+Re-encode used for assets/video/bellflower-flythrough.mp4
+(10-second cut starting at 0:02 — the walk in from the street — 720p, CRF 30,
+no audio, faststart, ~1.6 MB):
+
+  ffmpeg -y -ss 2 -t 10 -i ANIMATION-REVISIOV-5-HD.mp4 \
+    -an -vf "scale=1280:-2,format=yuv420p" \
+    -c:v libx264 -profile:v high -preset slow -crf 30 -movflags +faststart \
+    bellflower-flythrough.mp4
+
+Poster frame (grabbed at 0:04, i.e. ~2s into the clip):
+
+  ffmpeg -y -ss 4 -i ANIMATION-REVISIOV-5-HD.mp4 -frames:v 1 -q:v 2 -update 1 poster.jpg
+
+Then run poster.jpg through build/process_images.py as "bellflower-1".
+The page loads the video with preload="none" — it only downloads on click.

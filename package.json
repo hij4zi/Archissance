@@ -1,0 +1,16 @@
+{
+  "name": "archissance-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Archissance Design Group — studio website. Static HTML/CSS/JS, generated from build/.",
+  "type": "module",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "images": "python build/process_images.py",
+    "serve": "node --run build && npx --yes serve@14 .",
+    "standalone": "node build/build.mjs && node build/standalone.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}

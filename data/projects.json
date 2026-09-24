@@ -1,0 +1,342 @@
+{
+  "_note": "Single source of truth for project names, locations, clients, statuses, years and media. Updated per client source-of-truth list (revision 2). Status strings use the client's exact terminology — do not auto-convert Built<->Completed, Permitted<->Design, etc. Descriptions are the client's exact supplied copy — do not rewrite or summarize. Fields left out (e.g. Solano client, West Valley location) are omitted deliberately because the information was not provided. Category/sector is 'Infrastructure & Industrial'. Linden Point is categorised 'Mixed-Use' (per revision 3). Catalogue codes renumbered per revision 4 so A-01..A-13 run in category order (Mixed-Use, Commercial, Infrastructure & Industrial, Residential). West Valley client corrected to 'West Valley Water District' (revision 7). The Diamond Ring Company added as A-10 (Commercial); Infrastructure & Industrial and Residential codes shifted up by one accordingly (revision 8) — status/year confirmed directly by the user (renders dated Dec 2020; user specified Built — 2021), not itself part of the client source-of-truth copy. Revision 9: updated client copy for Fullerton Mixed-Use, 1012 J Street, Linden Point, Sharif Jewelers, Metro Fusion, Power Market Gas Station, and Solano Water Treatment Plant — summary/body replaced verbatim with the new supplied text (figures, SF, unit counts etc. changed accordingly; do not reconcile against the old copy). Sharif Jewelers retitled 'Sharif & Co.' to match the name used throughout its own new copy — every other entry's title is literally the first words of its summary, so this keeps that pattern; the title was not itself part of the supplied description text. 'Metro Fusion by Men's Land' and 'Power Market Fuel + PM C-Store / Papa Sal's Deli' were given as compound headers (project name + client/tenant) but the body copy for both consistently uses only the plain project name, so titles were left unchanged — flag to the user if a client field for Men's Land / H&S Energy is wanted. Revision 10: added Sharif Jewelers — Elk Grove (A-11, Commercial; slug sharif-jewelers-elk-grove) as a second, distinct Sharif location — status/year (Built — 2025) given directly by the user, not part of the supplied copy. Per the user's explicit instruction, both Sharif entries were retitled to disambiguate: the Roseville flagship (slug sharif-jewelers, unchanged) is now 'Sharif Jewelers — Roseville' (previously 'Sharif & Co.', set in revision 9), matching the em-dash + location pattern already used by Ontario Water Treatment Plant — Well 37 & 39; the Roseville entry's own summary/body still say 'Sharif & Co.' internally (that's the brand name in its own supplied copy) — only its title field changed. Infrastructure & Industrial and Residential codes shifted up by one again accordingly. Revision 11: added J & Huss Custom Jewelry (A-12, Commercial; slug j-huss-custom-jewelry) — status/year (Completed — 2020) given directly by the user, not part of the supplied copy. Its two storefront renders (jhuss-1, jhuss-2) are portrait-oriented, unlike every other image on the site — deliberately kept out of the hero slot and the odd-count auto-full-width position (both would balloon to an oversized vertical block under this site's `width:100%;height:auto` hero/gallery CSS, which has no max-height clamp) and instead paired together in the gallery; jhuss-3 (landscape) was chosen as hero and jhuss-4 (landscape) takes the auto-full-width slot instead. Infrastructure & Industrial and Residential codes shifted up by one again accordingly. Revision 12 (user request): J & Huss — dropped jhuss-2 (near-duplicate of jhuss-1, both portrait storefront shots) and swapped hero to jhuss-1 (the exterior storefront) with jhuss-3/jhuss-4 (interiors) now both full-width gallery rows — NOTE jhuss-1 is portrait (0.754 aspect), so its hero now renders very tall under this site's width:100%;height:auto hero CSS (no max-height clamp); flagged to the user, not yet resolved with a CSS change. Sharif Jewelers — Elk Grove: images reordered so sharifelkgrove-3 (a genuinely different, closer-angle perspective) leads instead of sharifelkgrove-4, since sharifelkgrove-4 read too similarly to the hero on the projects-index two-up thumbnail; this leaves sharifelkgrove-1+sharifelkgrove-4 paired in the gallery at an 8.4% aspect mismatch (unavoidable — with 3 images total, whichever isn't the standalone must pair with whatever's left). Commercial-sector project ORDER reorganized (not just catalogue numbers — projects.html groups by array order within each sector) so same-scope projects sit consecutively: all 4 jewelry retail projects now run together (A-04..A-07: Sharif Roseville, Sharif Elk Grove, Diamond Ring Co, J & Huss), followed by the medical office and retail-TI singles, then the 3 gas-station/convenience projects (already consecutive, kept together). Mixed-Use, Infrastructure & Industrial, and Residential were left as-is — each already reads as one coherent scope or has no sub-grouping to apply. Revision 13 (user request): J & Huss — hero swapped back to jhuss-3 (interior, landscape), resolving the oversized-portrait-hero issue flagged in revision 12; jhuss-1 (portrait) and jhuss-4 both stay full-width gallery rows. Sharif Jewelers — Roseville: images swapped sharif-building2 (the leased 1253 office building) for sharif-2, an earlier-generation render of the main 1251 building at a different angle from sharif-front/sharif-facade — both already-used images of the main building. metro-fusion moved to the end of the Commercial order (A-12); other commercial catalogue codes shifted down accordingly (jewelry group now A-04..A-07, then HB Medical A-08, then the 3 gas-station projects A-09..A-11). Revision 14 (user request): sharif-2 (an older-generation render, per the user) swapped back out for sharif-building2 (the 1253 building) — sharif-front promoted to the large/auto-full-width slot per the user's explicit instruction, leaving sharif-building2 (1.777 aspect) paired with sharif-facade (1.333) at a 25.0% height mismatch, worse than the 11.1% the facade+front pairing had — flagged to the user rather than silently picking a different, better-matched arrangement, since they specified which image should be large. Revision 15: Fullerton Mixed-Use — entire new render + video set (client folder had 8 renders, one as a PDF; dropped 3 near-duplicate crops, kept 5 distinct compositions: fullerton-1 (was image 9, aerial, now hero — reused the existing slot name so the hero field didn't need to change), fullerton-2 (ultra-wide street panorama, was 1.png, 8204px native, used as-is), fullerton-3 (dusk main entrance/garage/Chevron, was 2.png), fullerton-4 (resident-parking side, was the 3.pdf render extracted at 4822px, used as-is — a cleaner fuller version of what 8.png also showed), fullerton-5 (close-up entrance detail, was 5.png, square aspect). Gallery paired fullerton-2+fullerton-3 (15.2% mismatch — the best achievable of the 3 possible pairings given how aspect-diverse this set is, from a 2.67 panorama down to a 1.00 square close-up) and made fullerton-4/fullerton-5 full-width solo rows. Existing fullerton-site-plan/fullerton-landscape-plan were untouched (not part of the new render batch, still accurate). Video: the supplied clip had ~146px cinematic letterbox bars baked into the pixels (same class of issue as the earlier Sharif Jewelers video) — cropped clean via ffmpeg, re-encoded, audio stripped (site videos autoplay muted), poster frame and the 960px bundle-video copy regenerated from the cropped footage. Revision 16 (user request): swapped the video and fullerton-2 (the panorama showing the Chevron gas station, previously the first gallery image right after the video) — moved the video from `videos` (renders before the gallery) to `videosEnd` (renders after it), so fullerton-2 is now the first thing after the hero and the video now plays at the very end of the gallery instead of the start. Revision 17: Sharif Jewelers — Roseville — sharif-facade and sharif-front both swapped for refined re-renders of the identical compositions (same native resolution, same angles, minor lighting/detail pass — same class of update as the earlier golden-hour cover swap). Per the user's follow-up, sharif-facade (the angled/side dusk shot) is now the large auto-full-width image and sharif-front (the head-on elevation) pairs small with sharif-building2 — also drops the pairing mismatch from 25.0% to 15.6%, the best achievable of the 3 possible arrangements for these 3 images. Revision 18 (user request): fullerton-mixed-use retitled 'Veranda 1730' (the '1730' street address visible on several of its own renders) — title and the summary's opening words updated to match, per the established title-matches-first-words-of-summary pattern; slug kept as fullerton-mixed-use for URL stability, same precedent as the Sharif Roseville/Elk Grove renames. The user separately flagged a marketing card (Archissance logo + 'The Courtyards at Fullerton' + address/contact overlay baked into the same aerial render already used as the hero) — confirmed with the user it was not to be used, then confirmed the clean version they followed up with is pixel-identical to the fullerton-1 already live, so no image change was needed. Revision 19 (user request): fullerton-mixed-use retitled again, 'The Courtyards at Fullerton' (the actual marketing name seen on the branded card from revision 18) — superseding 'Veranda 1730'; title and summary opening updated again, slug still unchanged. Zero-tolerance alignment pass: every gallery pairing left at a nonzero mismatch in revisions 9-17 (accepted at the time as 'best achievable' among the available reorderings) was converted to full-width solo rows instead, per the user's explicit 'no awkward gaps anywhere' instruction — the-courtyards-at-fullerton (all 4 images, was 15.2%), sharif-jewelers/Roseville (all 3, was 15.6%), sharif-jewelers-elk-grove (all 3, was 8.3%). linden-point kept its one genuinely close pair (linden-2+linden-4, 3.8%) and made only the two that didn't match (linden-5, linden-3) full-width solo instead of forcing them together at 6.1%. A full site-wide audit (build/audit_alignment.mjs) confirmed these were the only 4 projects with any remaining row mismatch or orphan — all clear after this pass. Revision 20: added Gold & Diamond / G&D Center (A-08, Commercial; slug gold-diamond-center) as a 5th jewelry-retail project, slotted at the end of the jewelry group (A-04..A-08) — status/year (Built — 2020) given directly by the user, not part of the supplied copy. No location/client was supplied (only the mall brand name 'G&D Center', mentioned in the title/body, not a city) — left both fields out per the established 'don't fabricate' convention. All 3 gallery images marked full-width solo per the zero-tolerance alignment policy (revision 19) — no pairing among goldiamond-2 (1.167), goldiamond-3 (1.777) and goldiamond-4 (1.333) comes under 12.5% mismatch, so none were paired. Infrastructure & Industrial and Residential codes shifted up by one again accordingly. Revision 21: The Courtyards at Fullerton — added fullerton-6 (ultra-wide street panorama, Power Market + Chevron, alt angle) and fullerton-10 (close-up main entrance detail, alt angle), both genuinely new compositions, not duplicates of anything already shown. All 6 gallery images now full-width solo (no pair among the full set clears the zero-tolerance alignment threshold — closest was fullerton-5+fullerton-10 at 6.3%, still over), consistent with the existing 4. Revision 22: The Courtyards at Fullerton — added fullerton-11 (interior courtyard, children's play area — matches the body copy's own mention of this amenity, not shown anywhere else in the gallery) and fullerton-12 (resident-parking side, alt angle from fullerton-4 — confirmed genuinely different via pixel diff, 56/255 mean, not a duplicate). Checked all pairs across the full 8-image set; still nothing clears the zero-tolerance threshold, so both join as full-width solo rows too. Revision 23 (user request): Ontario Water Treatment Plant 925 — hero (ontario925-1) replaced with the aerial isometric view; added ontario925-3 (entrance-side elevation) and ontario925-4 (angled corner view), both genuinely new. The 4th supplied file (Ontario925_7.png) was pixel-identical to the already-live ontario925-2 (elevation, roll-up door side) and was skipped rather than re-added as a duplicate. Gallery order is [ontario925-2, ontario925-3, ontario925-4] — ontario925-2 sits alone (auto-full-width, N=3 odd) and 3+4 pair cleanly at a 4.5% aspect mismatch, under the zero-tolerance threshold. Revision 24 (user request): Ontario 925 — swapped ontario925-1 (hero), ontario925-3 (front elevation) and ontario925-4 (corner view) for refined re-renders of the same compositions (confirmed genuinely changed via pixel diff, 28-46/255 mean, not duplicates); added ontario925-5, a new angled-corner shot the user confirmed is intentional despite showing different materials (rough block, no red trim) than the other renders — flagged to the user before including it. Per explicit instruction: ontario925-3 (front elevation, 'view 1') and ontario925-4 (corner) are now both full-width — ontario925-3 because the user named it the largest, ontario925-4 because nothing pairs with it under 30% mismatch. ontario925-2 (back side, was the sole full-width image) now pairs with ontario925-5 at a clean 3.75% mismatch, making it 'one of the smaller images' as requested. The 5th supplied file (Ontario925_7.png) was again pixel-identical to ontario925-2 and skipped. Revision 25 (user request): The Courtyards at Fullerton — fullerton-11's content swapped from the children's-play-area courtyard to a different courtyard amenity (outdoor lounge/fire pit/grill, with the project's own name visible on an in-scene screen). Already a full-width solo image, so no alignment recalculation needed. Revision 26 (user request): Mixed-Use order reorganized — Fullerton, Linden Point, 1012 J Street (was Fullerton, 1012 J Street, Linden Point); catalogue codes A-01..A-03 renumbered to match, same array-order mechanism as the Commercial reorder in revision 10. Revision 27 (user request): Sharif Jewelers — Roseville — swapped the 3rd gallery image position between sharif-front and sharif-building2 (the 1253 building); order now facade, front, building2 (was facade, building2, front). All 3 already full-width solo, so no alignment recalculation needed.",
+  "projects": [
+    {
+      "slug": "fullerton-mixed-use",
+      "catalogue": "A-01",
+      "title": "The Courtyards at Fullerton",
+      "sector": "Mixed-Use",
+      "type": "Residential over commercial retail and parking",
+      "location": "Fullerton, California",
+      "scope": "Architecture, Entitlements, Construction Documents",
+      "status": "Design",
+      "featured": true,
+      "selected": true,
+      "hero": "fullerton-1",
+      "images": [{ "name": "fullerton-2", "wide": true }, { "name": "fullerton-3", "wide": true }, { "name": "fullerton-11", "wide": true }, { "name": "fullerton-4", "wide": true }, { "name": "fullerton-12", "wide": true }, { "name": "fullerton-5", "wide": true }, { "name": "fullerton-6", "wide": true }, { "name": "fullerton-10", "wide": true }],
+      "videosEnd": [{ "src": "fullerton-render.mp4", "poster": "fullerton-vframe", "caption": "Render walk-through of the block." }],
+      "summary": "The Courtyards at Fullerton transforms a complex infill site into a four-story podium community that integrates housing, commercial uses, parking, and shared open space within a cohesive urban development.",
+      "body": [
+        "The 165,884 SF project includes 95 one-, two-, and three-bedroom residences, with 10% designated as affordable housing and a residential density of approximately 50 units per acre. Housing is organized above commercial space and a parking garage, with approximately 4,000 SF of ground-floor lease office and retail/service uses. Public and private open spaces are distributed throughout the development, including landscaped gathering areas, a community room, children’s play area, dog park, and resident courtyards. The architecture responds to the irregular site through connected building masses and an urban infill character, while the entitlement process included rezoning to R5/Mixed-Use, a lot-line merger, conditional use permit, and CEQA negative declaration study."
+      ]
+    },
+    {
+      "slug": "linden-point",
+      "catalogue": "A-02",
+      "title": "Linden Point",
+      "sector": "Mixed-Use",
+      "type": "Live-work townhomes and stacked flats over retail",
+      "location": "West Sacramento, California",
+      "scope": "Architecture, Entitlements, Construction Documents",
+      "status": "Permitted",
+      "selected": true,
+      "hero": "linden-1",
+      "videos": [{ "src": "linden-hero.mp4", "poster": "linden-hero-vframe", "caption": "Render walk-through." }],
+      "images": [{ "name": "linden-5", "wide": true }, { "name": "linden-3", "wide": true }, "linden-2", "linden-4"],
+      "summary": "Linden Point combines housing, work-live units, and neighborhood-serving commercial space within a contemporary infill development designed to support both living and working on one site.",
+      "body": [
+        "Located in West Sacramento, the project includes 15 residences—six three-level work-live townhomes and nine stacked flats—along with commercial retail and service uses, with 10% of the housing designated as affordable. Each work-live unit provides an independently accessed commercial space at street level, living space on the second floor, and two bedrooms on the third, while the stacked flats average approximately 1,400 SF and are organized within a low-rise four-story building over retail. Metal cladding, cement plaster, projecting volumes, and angular parapets create a varied contemporary façade, while outdoor gathering areas, EV charging, and photovoltaic canopies over parking extend the project’s emphasis on shared space and energy-conscious design."
+      ]
+    },
+    {
+      "slug": "1012-j-street",
+      "catalogue": "A-03",
+      "title": "1012 J Street",
+      "sector": "Mixed-Use",
+      "type": "Retail and lobby at street level, residential above",
+      "location": "Downtown Sacramento, California",
+      "scope": "Architecture, Planning, Construction Documents",
+      "status": "Permitted",
+      "hero": "jstreet-2",
+      "images": ["jstreet-1", "jstreet-plan-1", "jstreet-plan-2"],
+      "summary": "1012 J Street gives new life to an existing downtown Sacramento building through adaptive reuse, introducing residential living above active commercial space just two blocks from the State Capitol.",
+      "body": [
+        "The 10,524 SF renovation converts a former office building historically occupied by a law school and library into a mixed-use development with commercial uses at the basement and first floor and four one-bedroom residences above. Approximately 3,000 SF of street-level retail is paired with a dedicated lobby providing stair and elevator access to the residential floor and basement, while the four residences range from approximately 560 to 650 SF. Because of its downtown location, the project is exempt from on-site parking requirements. A major façade renovation introduces brick veneer, black metal fenestration, and canopies, while accessibility, circulation, rooftop systems, and the existing structure are upgraded to support the new program."
+      ]
+    },
+    {
+      "slug": "chino-hills-residence",
+      "catalogue": "A-18",
+      "title": "Chino Hills Residence",
+      "sector": "Residential",
+      "type": "Custom hillside estate",
+      "location": "Chino Hills, California",
+      "scope": "Architecture, Interior Architecture",
+      "status": "Built — 2016",
+      "hero": "chinohills-11",
+      "images": ["colinas-1", "colinas-2", "colinas-4", "colinas-3", "colinas-5", "colinas-6", "colinas-7", "chinohills-1", "chinohills-2", "chinohills-3", "chinohills-4", "chinohills-5", "chinohills-6", "chinohills-7", "chinohills-8", "chinohills-9", "chinohills-10", "chinohills-12", "chinohills-13"],
+      "summary": "This custom Chino Hills residence combines refined Mediterranean architecture with expansive living spaces, resort-style amenities, and seamless indoor-outdoor connections.",
+      "body": [
+        "The approximately 10,150 SF estate includes six bedrooms and ten bathrooms, with a formal interior sequence defined by double-height spaces, dual staircases, an elevator, fireplaces, detailed millwork, stone flooring, and ornate classical detailing. Stucco walls, stone accents, clay tile roofs, arched openings, wrought-iron elements, and French doors establish a cohesive Mediterranean material palette throughout. The main living spaces open toward terraces, balconies, and a landscaped rear courtyard with a pool, spa, outdoor kitchen, multiple seating areas, and a circular pavilion, creating a strong connection between the home's interiors and its hillside setting."
+      ]
+    },
+    {
+      "slug": "bellflower-residences",
+      "catalogue": "A-19",
+      "title": "Bellflower Residences",
+      "sector": "Residential",
+      "type": "Eight-home for-sale community",
+      "location": "Bellflower, California",
+      "scope": "Architecture, Entitlements, Construction Documents",
+      "status": "Built — 2025",
+      "hero": "video",
+      "heroVideo": { "src": "bellflower-5.mp4", "poster": "bellflower-vframe-b" },
+      "videos": [{ "src": "bellflower-6.mp4", "poster": "bellflower-vframe-a", "caption": "Fly-through — the shared drive and motor court." }],
+      "elevation": "bellflower-elev",
+      "images": [],
+      "summary": "Bellflower Residences brings eight two-story homes together in a cohesive residential development that blends Mediterranean-inspired character with a comfortable suburban scale.",
+      "body": [
+        "The homes are organized as individual residences with private driveways and two-car garages, creating a clear sense of ownership while maintaining a unified streetscape. Stucco walls, warm clay tile roofs, stone veneer accents, and modest arched openings establish the architectural language, while varied rooflines, recessed entries, balconies, and projecting garage volumes give each home depth and distinction. Landscaping between the residences softens the street edge and reinforces the neighborhood character, resulting in a compact development that feels residential, approachable, and visually consistent without becoming repetitive."
+      ]
+    },
+    {
+      "slug": "irvine-residence-interior",
+      "catalogue": "A-20",
+      "title": "Irvine Residence Interior",
+      "sector": "Residential",
+      "type": "High-rise condominium — full interior",
+      "location": "Irvine, California",
+      "scope": "Interior Architecture, Construction Documents",
+      "status": "Completed — 2021",
+      "hero": "irvine-1",
+      "images": ["irvine-2", "irvine-3", "irvine-4", "irvine-5"],
+      "summary": "A gut renovation of a tower condominium, opened up to the glass so the city view is the first thing you see from the entry and the last thing from the kitchen.",
+      "body": [
+        "The original plan boxed the living space away from the windows. The renovation removes those walls, drops a long island where a partition used to be, and lines the kitchen up so the view runs uninterrupted from the front door to the far glass.",
+        "The palette is deliberately quiet — white lacquer, book-matched quartz, warm brass — so the changing light off the windows carries the room. A glass-walled study borrows that light without giving up acoustic separation.",
+        "Every surface, fixture and lighting position was drawn; the contractor built from a full interior set."
+      ]
+    },
+    {
+      "slug": "sharif-jewelers",
+      "catalogue": "A-04",
+      "title": "Sharif Jewelers — Roseville",
+      "sector": "Commercial",
+      "type": "Free-standing retail flagship",
+      "location": "Roseville, California",
+      "scope": "Architecture, Interior Architecture",
+      "status": "Built — 2024",
+      "selected": true,
+      "hero": "sharif-site",
+      "videos": [
+        { "src": "sharif-store.mp4", "poster": "sharif-store-vframe", "caption": "The flagship showroom and the leased office/retail building." }
+      ],
+      "images": [{ "name": "sharif-facade", "wide": true }, { "name": "sharif-front", "wide": true }, { "name": "sharif-building2", "wide": true }],
+      "videosEnd": [
+        { "src": "sharif-cars.mp4", "poster": "sharif-cars-vframe", "caption": "Cars and pedestrians arriving at the flagship." }
+      ],
+      "summary": "Sharif & Co. transforms six generations of family craftsmanship into a flagship architectural identity inspired by the materiality, precision, and presentation of fine jewelry.",
+      "body": [
+        "Located in Roseville near the Galleria and surrounding retail district, the development consists of a 5,952 SF flagship jewelry showroom, including its mezzanine, and a separate 1,850 SF medical office building. The showroom is conceived as a jewel box holding precious gems, with three sculptural buttresses representing the Sharif family’s past, present, and future. Metal composite cladding references the role of metal in goldsmithing, while expansive glazing creates transparency and allows natural light to animate both the façade and jewelry displays. Inside, the showroom is envisioned with a museum-like quality that places the jewelry at the center of the experience, while the building’s distinctive form and scale establish a recognizable presence within Roseville."
+      ]
+    },
+    {
+      "slug": "sharif-jewelers-elk-grove",
+      "catalogue": "A-05",
+      "title": "Sharif Jewelers — Elk Grove",
+      "sector": "Commercial",
+      "type": "Jewelry showroom tenant improvement",
+      "location": "Elk Grove, California",
+      "scope": "Interior Architecture, Construction Documents",
+      "status": "Built — 2025",
+      "hero": "sharifelkgrove-2",
+      "images": [{ "name": "sharifelkgrove-3", "wide": true }, { "name": "sharifelkgrove-1", "wide": true }, { "name": "sharifelkgrove-4", "wide": true }],
+      "summary": "Sharif Jewelers transforms an existing commercial interior in Elk Grove into a refined jewelry showroom organized around elegant circulation, layered lighting, and a warm contemporary material palette.",
+      "body": [
+        "The approximately 4,994 SF tenant improvement combines retail display areas with a vault, offices, lounge, break room, and accessory support spaces. Curved display counters and a large circular ceiling feature establish a clear focal point within the showroom, while dark wood millwork, polished stone flooring, glass display cases, and warm metallic accents create a sophisticated setting for the jewelry. A combination of recessed, accent, and decorative lighting highlights merchandise and defines key areas throughout the space, while expansive glazing brings natural light into the showroom. The project also includes new interior partitions, reflected ceiling and lighting improvements, selective HVAC modifications, electrical adjustments, and accessibility upgrades to the primary entrance, circulation route, and restrooms."
+      ]
+    },
+    {
+      "slug": "the-diamond-ring-company",
+      "catalogue": "A-06",
+      "title": "The Diamond Ring Company",
+      "sector": "Commercial",
+      "type": "Mall jewelry showroom tenant improvement",
+      "location": "San Jose, California",
+      "scope": "Architecture, Interior Architecture, Construction Documents",
+      "status": "Built — 2021",
+      "hero": "diamondring-1",
+      "images": [{ "name": "diamondring-2", "wide": true }, "diamondring-6", "diamondring-3", { "name": "diamondring-4", "wide": true }, "diamondring-5", "diamondring-7"],
+      "summary": "The Diamond Ring Company transforms a 2,310 SF mall tenant space into a refined jewelry showroom centered on visibility, elegance, and a strong luxury retail identity.",
+      "body": [
+        "Located at Westfield Valley Fair in San Jose, the tenant improvement introduces a new storefront and a complete interior refresh while retaining portions of the existing ceiling structure. The design is organized around illuminated glass display cases, dark wood cabinetry, polished flooring, and a restrained black, white, and champagne-gold palette that gives the showroom a sophisticated, gallery-like character. A geometric gold feature wall and coordinated storefront surround reinforce the brand at key focal points, while layered lighting, mirrored elements, and crystal chandeliers add depth and brightness throughout the space. The project also includes updated lighting, modified HVAC distribution, raised soffits, new floor finishes, and new store fixtures, resulting in a cohesive retail environment designed to showcase the jewelry as the primary visual focus."
+      ]
+    },
+    {
+      "slug": "j-huss-custom-jewelry",
+      "catalogue": "A-07",
+      "title": "J & Huss Custom Jewelry",
+      "sector": "Commercial",
+      "type": "Mall jewelry showroom tenant improvement",
+      "location": "San Jose, California",
+      "scope": "Architecture, Interior Architecture, Construction Documents",
+      "status": "Completed — 2020",
+      "hero": "jhuss-3",
+      "images": [{ "name": "jhuss-1", "wide": true }, { "name": "jhuss-4", "wide": true }],
+      "summary": "J & Huss Custom Jewelry transforms a compact mall tenant space into a refined, contemporary showroom that uses transparency, lighting, and carefully detailed displays to give the brand a stronger retail presence.",
+      "body": [
+        "Located at Eastridge Mall in San Jose, the approximately 789 SF tenant improvement introduces a new storefront, updated lighting, floor finishes, and custom jewelry fixtures within the existing shell. The design pairs a white brick façade with black metal framing and expansive glazing to create a crisp, highly visible storefront, while the interior uses a restrained palette of warm neutrals, dark accents, illuminated wall displays, and glass showcases to keep the jewelry as the primary focus. Raised soffits and layered lighting help define key display and service areas, while selective HVAC modifications and the reuse of the existing ceiling allow the renovation to work efficiently within the existing building conditions."
+      ]
+    },
+    {
+      "slug": "gold-diamond-center",
+      "catalogue": "A-08",
+      "title": "Gold & Diamond",
+      "sector": "Commercial",
+      "type": "Mall jewelry showroom tenant improvement",
+      "scope": "Interior Architecture, Construction Documents",
+      "status": "Built — 2020",
+      "hero": "goldiamond-1",
+      "images": [{ "name": "goldiamond-4", "wide": true }, { "name": "goldiamond-2", "wide": true }, { "name": "goldiamond-3", "wide": true }],
+      "summary": "Gold & Diamond transforms a compact retail footprint into a bright, contemporary jewelry showroom where clean architectural lines, refined materials, and layered lighting create an elevated setting for merchandise display.",
+      "body": [
+        "The approximately 869 SF tenant improvement is organized around a 685 SF retail showroom supported by dedicated storage/utility and restroom spaces. The renovation includes a completely redesigned storefront, new non-bearing partitions, ceilings and soffits, lighting, floor finishes, HVAC distribution, and custom store fixtures. A crisp palette of white stone and marble-inspired surfaces, black metal detailing, polished flooring, and expansive glazing gives the storefront a strong presence within the surrounding retail environment. Inside, illuminated glass showcases line the perimeter and define clear circulation through the showroom, while integrated display lighting and a sculptural central fixture create focal points throughout the space. The result is a compact but polished retail environment designed to maximize product visibility while giving Gold & Diamond a distinct, sophisticated identity."
+      ]
+    },
+    {
+      "slug": "huntington-beach-medical-offices",
+      "catalogue": "A-09",
+      "title": "Huntington Beach Medical Offices",
+      "sector": "Commercial",
+      "type": "Free-standing medical and professional office building",
+      "location": "Huntington Beach, California",
+      "scope": "Architecture, Construction Documents",
+      "status": "Built — 2023",
+      "hero": "hbmedical-1",
+      "images": [{ "name": "hbmedical-2", "wide": true }, "hbmedical-3", "hbmedical-4", { "name": "hbmedical-site-plan", "wide": true }],
+      "summary": "Huntington Beach Medical Offices creates a contemporary three-tenant healthcare destination designed around visibility, accessibility, and a welcoming patient experience.",
+      "body": [
+        "Located along Brookhurst Street, the project develops the 35,000 SF site with approximately 7,600 SF of medical office space organized into three tenant suites. The architecture breaks down the building mass through varied rooflines, contrasting façade materials, and clearly defined storefront entries, giving each practice an individual identity while maintaining a cohesive overall design. Expansive glazing brings natural light into the tenant spaces, while integrated parking, landscaping, and accessible circulation create a functional and approachable environment for patients, staff, and visitors."
+      ]
+    },
+    {
+      "slug": "powermarket-gas-station",
+      "catalogue": "A-10",
+      "title": "Power Market Gas Station",
+      "sector": "Commercial",
+      "type": "Fuel canopy and convenience retail",
+      "location": "Woodland, Yolo County, California",
+      "scope": "Architecture, Construction Documents, Construction Administration",
+      "status": "Under Construction — Projected Completion 2027",
+      "hero": "powermarket-1",
+      "images": ["powermarket-axon", "powermarket-2", "powermarket-3"],
+      "summary": "Power Market in Woodland establishes a flood-resilient roadside prototype that brings fueling, convenience retail, food service, car wash, and EV charging together within one coordinated development.",
+      "body": [
+        "Located on a corner site adjacent to the Interstate 5 southbound ramp, the project is anchored by an approximately 4,200 SF Power Market convenience store incorporating a full-size Papa Sal’s Deli. The fueling canopy provides six pumps and twelve gasoline and diesel dispensers, while the automatic touch-free car wash incorporates filtration and water-reuse technology to reduce water consumption. Level 3 DC fast charging expands the site’s range of vehicle services. Because the property lies within a flood zone, the development was designed for a 200-year flood event, requiring the c-store to be elevated using retaining walls and coordinated grading. Layered massing, storefront glazing, stone, plaster, metal, aluminum, and warm accent materials establish a contemporary architectural language that was developed as a prototype for future H&S Energy convenience-store projects."
+      ]
+    },
+    {
+      "slug": "union-city-power-market",
+      "catalogue": "A-11",
+      "title": "Union City Power Market",
+      "sector": "Commercial",
+      "type": "Fuel canopy and convenience retail",
+      "location": "Union City, California",
+      "scope": "Architecture, Construction Documents, Construction Administration",
+      "status": "Design",
+      "hero": "unioncity-3",
+      "images": ["unioncity-1", "unioncity-2", "unioncity-4"],
+      "summary": "Union City Power Market reimagines the neighborhood service station as a contemporary, pedestrian-conscious retail destination that integrates architecture, circulation, and public transit access.",
+      "body": [
+        "The redevelopment replaces the existing convenience store and fueling canopy with a new 2,375 SF Power Market and an expanded 2,875 SF canopy on the approximately 0.5-acre site. The building is composed through a series of articulated volumes, including a prominent stone-clad entry tower, lower storefront elements, and contrasting vertical masses that create a strong identity along Alvarado-Niles Road. Architectural stone, smooth plaster, metal cladding, wood-toned accents, aluminum canopies, and expansive glazing establish a cohesive contemporary material palette across the site. The store is positioned to maintain efficient vehicular circulation while creating safer pedestrian connections to the adjacent transportation center, with accessible parking and routes designed to minimize conflicts with vehicle traffic. Landscaped buffers, consolidated site access, and integrated service elements further strengthen the relationship between the development, surrounding streets, and public realm."
+      ]
+    },
+    {
+      "slug": "montclair-chevron-gas-station",
+      "catalogue": "A-12",
+      "title": "Montclair Chevron Gas Station",
+      "sector": "Commercial",
+      "type": "Fuel canopy and convenience retail",
+      "location": "Montclair, California",
+      "scope": "Architecture, Construction Documents, Construction Administration",
+      "status": "Design",
+      "hero": "montclair-2",
+      "images": ["montclair-1", "montclair-3", "montclair-4"],
+      "summary": "Montclair Chevron repositions an existing service station as a contemporary automotive and retail destination, integrating fueling, convenience retail, and car wash functions within a compact and highly coordinated site.",
+      "body": [
+        "Located along Central Avenue, the redevelopment introduces a new approximately 1,750 SF ExtraMile convenience store, a 495 SF automatic car wash, supporting equipment spaces, and an updated Chevron fueling environment. The architecture combines brick masonry, smooth stucco, metal detailing, broad storefront glazing, and articulated parapet elements to create a cohesive identity across the store and car wash. A taller central entry volume establishes a clear focal point, while lower horizontal masses and canopies help organize the building at a pedestrian scale. Site planning carefully coordinates fueling, parking, car wash circulation, service access, and landscaped edges within the constrained 0.49-acre property, creating an efficient customer experience while giving the station a stronger architectural presence along the street."
+      ]
+    },
+    {
+      "slug": "metro-fusion",
+      "catalogue": "A-13",
+      "title": "Metro Fusion",
+      "sector": "Commercial",
+      "type": "In-line retail tenant improvement and storefront",
+      "location": "Culver City, California",
+      "scope": "Interior Architecture, Construction Documents",
+      "status": "Built — 2012",
+      "hero": "metrofusion-store",
+      "beforeAfter": { "before": "metrofusion-before", "after": "metrofusion-after" },
+      "images": ["metrofusion-floor"],
+      "summary": "Metro Fusion turns a visibility-constrained retail space into a stronger public-facing storefront by extending the store’s architectural identity beyond the limits of the tenant space.",
+      "body": [
+        "The approximately 4,000 SF retail store is positioned beneath a second-level mezzanine, where limited vertical clearance created challenges for storefront visibility and branding. Rather than allowing the low mezzanine condition to define the store, the design uses the surrounding structure as an extension of the storefront, carrying finishes and architectural elements beyond the tenant boundary and into the public area. This strategy increases the store’s visual presence and creates a more identifiable retail frontage despite the constrained existing condition."
+      ]
+    },
+    {
+      "slug": "west-valley-water-treatment-plant",
+      "catalogue": "A-14",
+      "title": "West Valley Water Treatment Plant",
+      "sector": "Infrastructure & Industrial",
+      "type": "Water treatment facility",
+      "client": "West Valley Water District",
+      "status": "Completed — 2026",
+      "selected": true,
+      "hero": "westvalley-1",
+      "images": [{ "name": "westvalley-5", "wide": true }, { "name": "westvalley-3", "wide": true }, "westvalley-2", "westvalley-4"],
+      "summary": "West Valley Water Treatment Plant expands critical treatment infrastructure while creating a dedicated operations environment that brings technical, administrative, and employee spaces together within one cohesive facility.",
+      "body": [
+        "Owned by West Valley Water District, the project combines a 7,696 SF filtration building with a 2,685 SF operations building designed to support both plant processes and day-to-day staff functions. The pre-engineered metal filtration building provides large clear-span spaces and oversized roll-up doors for equipment access and maintenance, while the operations building houses a laboratory, SCADA and PLC rooms, offices, a breakroom with kitchen, employee facilities, and an education and training center. Contrasting metal cladding, stucco volumes, stone accents, exposed structural elements, and generous glazing distinguish the public-facing operations spaces from the more utilitarian treatment areas, creating a unified civic-industrial campus that supports both infrastructure and the people who operate it."
+      ]
+    },
+    {
+      "slug": "solano-water-treatment",
+      "catalogue": "A-15",
+      "title": "Solano Water Treatment Plant",
+      "sector": "Infrastructure & Industrial",
+      "type": "Water treatment facility",
+      "location": "UC Davis, Davis, California",
+      "scope": "Architecture, Construction Documents",
+      "status": "Under Construction",
+      "hero": "solano-3",
+      "images": [{ "name": "solano-1", "wide": true }, { "name": "solano-2", "wide": true }],
+      "summary": "Solano Water Treatment Plant combines a highly technical one-MGD treatment program with a hybrid building system designed around UC Davis standards, process flow, future expansion, and long-term operational efficiency.",
+      "body": [
+        "Owned by UC Davis and located just off campus, the facility accommodates filtration equipment, pumps, electrical systems, laboratory and control spaces, and the clear-span service areas required for plant operations and maintenance. The building uses concrete masonry up to approximately 8'-8\" with a prefabricated metal structure above, creating a durable base around equipment and circulation while giving the facility greater architectural articulation than a conventional all-metal industrial building. Large service openings support equipment access, while a separate canopy shelters tanks and less-sensitive process equipment, reducing enclosed building area and construction cost. The design also allows for future expansion as treatment capacity increases while maintaining the operational requirements and design standards established by UC Davis."
+      ]
+    },
+    {
+      "slug": "ontario-water-treatment-plant-well-37-39",
+      "catalogue": "A-16",
+      "title": "Ontario Water Treatment Plant — Well 37 & 39",
+      "sector": "Infrastructure & Industrial",
+      "type": "Municipal water treatment facility",
+      "location": "Ontario, California",
+      "client": "City of Ontario",
+      "status": "Built — 2023",
+      "hero": "ontario3739-1",
+      "images": ["ontario3739-2"],
+      "summary": "Ontario Wells 37 & 39 Water Treatment Plant pairs highly technical water infrastructure with a durable, straightforward architectural expression designed around long-term operation and maintenance.",
+      "body": [
+        "The approximately 1,992 SF CMU facility houses treatment equipment and chemical systems alongside an office, storage area, generator room, and electrical room. Its simple gabled form and metal roof create a compact, utilitarian building envelope, while tan masonry and horizontal textured CMU bands give the exterior depth and a cohesive civic-industrial character. Large service openings and direct connections to exterior tanks, piping, valves, and treatment equipment support efficient access for daily operations and maintenance, allowing the architecture and process infrastructure to function as an integrated system."
+      ]
+    },
+    {
+      "slug": "ontario-water-treatment-plant-925",
+      "catalogue": "A-17",
+      "title": "Ontario Water Treatment Plant 925",
+      "sector": "Infrastructure & Industrial",
+      "type": "Municipal water treatment facility",
+      "location": "Ontario, California",
+      "client": "City of Ontario",
+      "status": "Construction Documents Phase",
+      "hero": "ontario925-1",
+      "images": [{ "name": "ontario925-3", "wide": true }, { "name": "ontario925-4", "wide": true }, "ontario925-2", "ontario925-5"],
+      "summary": "Ontario 925 Water Treatment Plant combines robust utility infrastructure with a straightforward architectural expression designed around long-term operation, maintenance, and equipment access.",
+      "body": [
+        "The approximately 9,199 SF facility is constructed as a concrete masonry building with a single-ply roof system and is organized to support the pumping, control, instrumentation, and chemical treatment systems serving Reservoir 925. Program spaces include a pump room, control room, chemical storage and generation area, generator enclosure, electrical room, and associated support spaces. Large roll-up doors and generous service clearances provide direct access for equipment installation and maintenance, while the exterior uses brick masonry, concrete accents, and carefully proportioned openings to give the highly technical facility a durable and cohesive civic-industrial character."
+      ]
+    }
+  ]
+}

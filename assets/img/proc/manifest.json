@@ -1,0 +1,474 @@
+{
+"fullerton-1": [
+3840,
+2212
+],
+"fullerton-2": [
+3840,
+1436
+],
+"fullerton-3": [
+3840,
+1694
+],
+"fullerton-4": [
+3840,
+2265
+],
+"fullerton-5": [
+3840,
+3840
+],
+"fullerton-6": [
+3840,
+1284
+],
+"fullerton-10": [
+3840,
+3600
+],
+"fullerton-11": [
+3840,
+2161
+],
+"fullerton-12": [
+3840,
+1937
+],
+"fullerton-site-plan": [
+3840,
+3231
+],
+"fullerton-landscape-plan": [
+3127,
+2404
+],
+"jstreet-1": [
+1177,
+896
+],
+"jstreet-2": [
+1853,
+849
+],
+"jstreet-plan-1": [
+3268,
+3459
+],
+"jstreet-plan-2": [
+3269,
+3459
+],
+"colinas-1": [
+3840,
+2446
+],
+"colinas-2": [
+3840,
+2746
+],
+"colinas-3": [
+3840,
+2442
+],
+"colinas-4": [
+3840,
+2750
+],
+"colinas-5": [
+3840,
+2446
+],
+"colinas-6": [
+3840,
+2446
+],
+"colinas-7": [
+3840,
+2446
+],
+"chinohills-1": [
+3072,
+2304
+],
+"chinohills-2": [
+3072,
+2304
+],
+"chinohills-3": [
+3072,
+2304
+],
+"chinohills-4": [
+3072,
+2304
+],
+"chinohills-5": [
+3072,
+2304
+],
+"chinohills-6": [
+3072,
+2304
+],
+"chinohills-7": [
+3072,
+2304
+],
+"chinohills-8": [
+3072,
+2304
+],
+"chinohills-9": [
+3072,
+2304
+],
+"chinohills-10": [
+3072,
+2304
+],
+"chinohills-11": [
+3072,
+2304
+],
+"chinohills-12": [
+3072,
+2304
+],
+"chinohills-13": [
+3072,
+2304
+],
+"bellflower-elev": [
+2474,
+416
+],
+"bellflower-poster": [
+1280,
+720
+],
+"fullerton-vframe": [
+1280,
+428
+],
+"bellflower-vframe-a": [
+1280,
+720
+],
+"bellflower-vframe-b": [
+1280,
+720
+],
+"sharif-vframe": [
+1280,
+720
+],
+"sharif-cars-vframe": [
+1280,
+548
+],
+"sharif-store-vframe": [
+1280,
+720
+],
+"linden-vframe": [
+1280,
+720
+],
+"linden-hero-vframe": [
+1280,
+720
+],
+"sharif-site": [
+1916,
+821
+],
+"sharif-front": [
+1536,
+1024
+],
+"sharif-building2": [
+1672,
+941
+],
+"sharif-facade": [
+1448,
+1086
+],
+"sharif-site-plan": [
+3840,
+3538
+],
+"linden-1": [
+1931,
+814
+],
+"linden-2": [
+1895,
+830
+],
+"linden-3": [
+1725,
+912
+],
+"linden-4": [
+1932,
+814
+],
+"linden-5": [
+1672,
+941
+],
+"irvine-1": [
+1024,
+655
+],
+"irvine-2": [
+1024,
+651
+],
+"irvine-3": [
+1024,
+651
+],
+"irvine-4": [
+1024,
+651
+],
+"irvine-5": [
+1024,
+651
+],
+"sharif-1": [
+2624,
+1600
+],
+"sharif-2": [
+2556,
+1632
+],
+"metrofusion-store": [
+1132,
+928
+],
+"metrofusion-after": [
+1306,
+800
+],
+"metrofusion-floor": [
+1448,
+1086
+],
+"metrofusion-before": [
+2016,
+1512
+],
+"powermarket-1": [
+3840,
+1755
+],
+"powermarket-2": [
+3840,
+1727
+],
+"powermarket-3": [
+3840,
+1682
+],
+"powermarket-axon": [
+3840,
+2594
+],
+"unioncity-1": [
+3840,
+2161
+],
+"unioncity-2": [
+3840,
+2880
+],
+"unioncity-3": [
+3840,
+2880
+],
+"unioncity-4": [
+3840,
+2880
+],
+"montclair-1": [
+3840,
+2303
+],
+"montclair-2": [
+3840,
+2022
+],
+"montclair-3": [
+3840,
+2161
+],
+"montclair-4": [
+3840,
+2161
+],
+"hbmedical-1": [
+3840,
+1600
+],
+"hbmedical-2": [
+3840,
+1536
+],
+"hbmedical-3": [
+3840,
+2161
+],
+"hbmedical-4": [
+3840,
+2161
+],
+"hbmedical-site-plan": [
+3840,
+2805
+],
+"solano-1": [
+2056,
+765
+],
+"solano-2": [
+1849,
+851
+],
+"solano-3": [
+1631,
+964
+],
+"ontario925-1": [
+3840,
+1622
+],
+"ontario925-2": [
+1774,
+887
+],
+"ontario925-3": [
+3840,
+1284
+],
+"ontario925-4": [
+3840,
+1280
+],
+"ontario925-5": [
+3840,
+1848
+],
+"ontario3739-1": [
+1295,
+832
+],
+"ontario3739-2": [
+1474,
+704
+],
+"westvalley-1": [
+1983,
+793
+],
+"westvalley-2": [
+1476,
+1065
+],
+"westvalley-3": [
+1294,
+1216
+],
+"westvalley-4": [
+1484,
+1060
+],
+"westvalley-5": [
+1867,
+842
+],
+"diamondring-1": [
+3840,
+2339
+],
+"diamondring-2": [
+3840,
+1358
+],
+"diamondring-3": [
+3840,
+2388
+],
+"diamondring-4": [
+3840,
+2141
+],
+"diamondring-5": [
+3840,
+2379
+],
+"diamondring-6": [
+3840,
+2402
+],
+"diamondring-7": [
+3840,
+2266
+],
+"sharifelkgrove-1": [
+3840,
+2303
+],
+"sharifelkgrove-2": [
+3840,
+1965
+],
+"sharifelkgrove-3": [
+3840,
+2303
+],
+"sharifelkgrove-4": [
+3840,
+2111
+],
+"jhuss-1": [
+3840,
+5092
+],
+"jhuss-2": [
+3840,
+4565
+],
+"jhuss-3": [
+3840,
+2030
+],
+"jhuss-4": [
+3840,
+2880
+],
+"goldiamond-1": [
+3840,
+2161
+],
+"goldiamond-2": [
+3840,
+3290
+],
+"goldiamond-3": [
+3840,
+2161
+],
+"goldiamond-4": [
+3840,
+2880
+],
+"logo-a": [
+598,
+562
+]
+}

@@ -1,0 +1,14 @@
+node_modules/
+build/shots/
+.DS_Store
+*.log
+
+# session revert-copies — never referenced by the live site, pure scratch
+build/_backup-*/
+
+# generated build artifacts — fully regenerable (node build/standalone.mjs,
+# python build/bundle_images.py); not the real source of truth
+build/index.standalone.html
+build/index.artifact.html
+build/bundle-img/
+build/bundle-video/
