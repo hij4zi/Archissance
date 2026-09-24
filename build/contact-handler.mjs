@@ -94,18 +94,22 @@ export async function handleContact(req, res) {
     }
 
     let dbSaved = false;
+    let dbErrorMsg = null;
     try {
       await saveEnquiry({ name, email, projectType, message });
       dbSaved = true;
     } catch (err) {
+      dbErrorMsg = err.message;
       console.error("enquiry.db_save.failed", err);
     }
 
     let emailSent = false;
+    let emailErrorMsg = null;
     const recipient = process.env.CONTACT_FORM_RECIPIENT_EMAIL;
     if (!recipient) {
       // Never send to nowhere — but this alone doesn't fail the request when
       // the DB save above succeeded; the enquiry is still on record.
+      emailErrorMsg = "CONTACT_FORM_RECIPIENT_EMAIL is unset";
       console.error("email.contact_form.recipient_unset");
     } else {
       try {
@@ -125,16 +129,28 @@ export async function handleContact(req, res) {
         });
         emailSent = true;
       } catch (err) {
+        emailErrorMsg = err.message;
         console.error("email.send.failed", err);
       }
     }
 
+    // TEMPORARY diagnostic escape hatch — remove once email delivery is
+    // confirmed working. Never exposed to a normal form submission: only
+    // fires for a request carrying this exact header, which the public
+    // fetch()/form submit in assets/js/main.js never sends.
+    const debugRequested = req.headers["x-contact-debug"] === "archissance-diag-2026";
+    const debug = debugRequested
+      ? { dbSaved, dbErrorMsg, emailSent, emailErrorMsg, recipientConfigured: !!recipient }
+      : undefined;
+
     if (dbSaved || emailSent) {
-      return isJson ? respondJson(res, 200, { success: true }) : respondRedirect(res, "sent=1");
+      const body = debug ? { success: true, debug } : { success: true };
+      return isJson ? respondJson(res, 200, body) : respondRedirect(res, "sent=1");
     }
 
     const msg = "We couldn't send your message — please try again or email us directly.";
-    return isJson ? respondJson(res, 500, { error: msg }) : respondRedirect(res, "sent=0");
+    const body = debug ? { error: msg, debug } : { error: msg };
+    return isJson ? respondJson(res, 500, body) : respondRedirect(res, "sent=0");
   } catch (err) {
     console.error("contact.unexpected_error", err);
     const msg = "We couldn't send your message — please try again or email us directly.";
