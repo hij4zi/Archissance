@@ -830,7 +830,9 @@ p + p { margin-top: 1.1em; }
 }
 .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--accent); background: #fff; }
 .field textarea { resize: vertical; min-height: 8rem; }
-.form-note { font-size: var(--fs-sm); color: var(--ink-45); }
+.form-note { font-size: var(--fs-sm); color: var(--ink-45); transition: color 0.2s var(--ease); }
+.form-note.is-success { color: var(--ink); font-weight: 500; }
+.form-note.is-error { color: var(--red-ink); font-weight: 500; }
 
 /* ---------- Utility column spans ----------
    Note: only grid-column-END is set here so a separate .start-* class can

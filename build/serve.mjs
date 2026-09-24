@@ -16,6 +16,7 @@ import { createServer } from "node:http";
 import { createReadStream, statSync } from "node:fs";
 import { join, extname, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
+import { handleContact } from "./contact-handler.mjs";
 
 const ROOT = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 const PORT = Number(process.argv[2]) || Number(process.env.PORT) || 4180;
@@ -31,6 +32,11 @@ const MIME = {
 };
 
 createServer((req, res) => {
+  const pathOnly = req.url.split("?")[0];
+  if (req.method === "POST" && pathOnly === "/api/contact") {
+    return handleContact(req, res);
+  }
+
   let p = decodeURIComponent(req.url.split("?")[0]);
   if (p.endsWith("/")) p += "index.html";
   const file = join(ROOT, normalize(p).replace(/^(\.\.[/\\])+/, ""));

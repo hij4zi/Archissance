@@ -415,10 +415,18 @@ Set in `build/partials.mjs` → `SITE`:
       standalone bundle — the artifact shows first-frame posters there (hero
       still drifts). The deployed site's real `<source>` files play in Safari fine.
 - [ ] **Domain** — `archissance.com` assumed for `<link rel="canonical">` / Open Graph. Confirm.
-- [ ] **Contact form** — points at `https://formspree.io/f/your-form-id`. Create a
-      [Formspree](https://formspree.io) form (or use Netlify Forms / your own endpoint)
-      and set the real `action` in `build/build.mjs` → `contact()`. Until then the
-      form does not deliver; the mailto fallback does.
+- [ ] **Contact form** — posts to `/api/contact` (`build/contact-handler.mjs`),
+      which sends through GoDaddy Node.js Hosting's built-in email gateway
+      (`build/email.mjs`). **Set `CONTACT_FORM_RECIPIENT_EMAIL`** (e.g.
+      `samir@archissance.com`) as an environment variable in the Node.js
+      Hosting UI — the handler fails closed (500, generic message, no
+      submissions silently dropped) if it's unset. Works with JS disabled
+      (native form POST → 303 redirect to `contact.html?sent=1|0`) and is
+      progressively enhanced by `assets/js/main.js` (fetch + inline status
+      message) when JS is available. Locally, the gateway at
+      `127.0.0.1:2525` only exists inside a GoDaddy container, so a real
+      send always fails with "email gateway unreachable" — that's expected;
+      the route's validation/response logic still exercises correctly.
 - [x] **Project data** — titles, locations, clients, statuses, years and the seven
       supplied project descriptions reconciled to the studio's revision-2
       source-of-truth list (`data/projects.json`). `summary`/`body` for Bellflower,

@@ -520,7 +520,7 @@ function contact() {
       </div>
 
       <div class="col-7 start-6" data-reveal data-reveal-delay="1">
-        <form class="form" method="POST" action="https://formspree.io/f/your-form-id">
+        <form class="form" method="POST" action="/api/contact" data-contact-form>
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" autocomplete="name" required>
@@ -542,13 +542,12 @@ function contact() {
             </select>
           </div>
           <div class="field">
-            <label for="message">About the site</label>
-            <textarea id="message" name="message" rows="5" placeholder="Address, size, timeline, and anything already drawn."></textarea>
+            <label for="message">About the project</label>
+            <textarea id="message" name="message" rows="5" placeholder="Address, size, timeline, and anything already drawn." required></textarea>
           </div>
           <button class="btn" type="submit">Send enquiry <span class="arw" aria-hidden="true">&rarr;</span></button>
-          <p class="form-note">
+          <p class="form-note" data-contact-status role="status" aria-live="polite">
             Prefer email? Write to <a href="mailto:${SITE.email}">${SITE.email}</a> directly.
-            This form needs a submission endpoint connected before it will deliver &mdash; see the project README.
           </p>
         </form>
       </div>

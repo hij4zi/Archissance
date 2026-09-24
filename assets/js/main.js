@@ -425,4 +425,64 @@
 
   initScrollFx(document);
   window.__archScrollFx = initScrollFx;
+
+  /* ---------- contact form: JS-enhanced submit + no-JS redirect state ----------
+     Progressive enhancement over the plain <form method="POST" action="/api/contact">
+     in build/build.mjs's contact() — that native submit already works with JS
+     disabled (build/contact-handler.mjs responds with a 303 redirect back to
+     ?sent=1 / ?sent=0). With JS available, intercept the submit and POST JSON
+     instead, so the visitor gets an inline status message without leaving the
+     page. The sent= reveal below also covers a plain form submission that
+     lands back here with JS enabled (e.g. the fetch path failed and the
+     native submit went through) — a fresh page load runs this normally. */
+  var contactForm = document.querySelector("[data-contact-form]");
+  if (contactForm) {
+    var statusEl = contactForm.querySelector("[data-contact-status]");
+    var setStatus = function (text, state) {
+      if (!statusEl) return;
+      statusEl.textContent = text;
+      statusEl.classList.remove("is-success", "is-error");
+      if (state) statusEl.classList.add(state);
+    };
+
+    contactForm.addEventListener("submit", function (evt) {
+      if (!window.fetch) return; // no fetch -> let the native POST fallback run
+      evt.preventDefault();
+      var submitBtn = contactForm.querySelector('button[type="submit"]');
+      var data = {};
+      new FormData(contactForm).forEach(function (v, k) { data[k] = v; });
+      if (submitBtn) submitBtn.disabled = true;
+      setStatus("Sending…", null);
+
+      fetch(contactForm.getAttribute("action"), {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            if (!res.ok || !body.success) throw new Error(body.error || "Something went wrong — please try again.");
+            setStatus("Thanks — your message is on its way. We'll be in touch soon.", "is-success");
+            contactForm.reset();
+          });
+        })
+        .catch(function (err) {
+          setStatus(err.message || "Something went wrong — please try again.", "is-error");
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+
+    // Reveal the outcome of a plain (no-JS-path) form POST that redirected here.
+    var sentParam = new URLSearchParams(location.search).get("sent");
+    if (sentParam === "1") {
+      setStatus("Thanks — your message is on its way. We'll be in touch soon.", "is-success");
+    } else if (sentParam === "0") {
+      setStatus("Something went wrong — please try again or email us directly.", "is-error");
+    }
+    if (sentParam !== null) {
+      history.replaceState(null, "", location.pathname + location.hash);
+    }
+  }
 })();
