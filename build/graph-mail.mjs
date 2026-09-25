@@ -16,6 +16,16 @@ const REQUEST_TIMEOUT_MS = 30_000;
 
 let cachedToken = null; // { value, expiresAt }
 
+// Which MS_* variables the running app can see — names and yes/no only, never
+// values. Also lists any env names that look like MS_* (JSON-quoted so a
+// trailing space or odd case in a mistyped name is visible).
+export function graphEnvCheck() {
+  const names = ["MS_TENANT_ID", "MS_CLIENT_ID", "MS_CLIENT_SECRET", "MS_SENDER"];
+  const present = Object.fromEntries(names.map((n) => [n, Boolean(process.env[n])]));
+  const lookalikes = Object.keys(process.env).filter((k) => /^\s*ms[\s_-]/i.test(k)).map((k) => JSON.stringify(k));
+  return { present, lookalikes };
+}
+
 export function isGraphConfigured() {
   return Boolean(
     process.env.MS_TENANT_ID &&
