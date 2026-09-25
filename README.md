@@ -424,6 +424,11 @@ Set in `build/partials.mjs` → `SITE`:
         `samir@archissance.com`) as an environment variable in the Node.js
         Hosting UI — with it unset, no email is sent (logged server-side),
         but a submission still succeeds if the DB save below works.
+        Because archissance.com mail is on Microsoft 365, the gateway's mail
+        can be quarantined as spoofed. If `MS_TENANT_ID`, `MS_CLIENT_ID`,
+        `MS_CLIENT_SECRET` and `MS_SENDER` are all set, `build/graph-mail.mjs`
+        sends through Microsoft Graph (Mail.Send app permission) as
+        `MS_SENDER` instead — authenticated, so it lands normally.
       - **A durable row in GoDaddy managed MySQL** (`build/db.mjs`, table
         `enquiries`, auto-created on first use). **Enable managed MySQL** for
         this app in the Node.js Hosting UI so the platform injects

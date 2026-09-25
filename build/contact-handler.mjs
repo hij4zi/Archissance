@@ -27,6 +27,7 @@
    outside the platform. */
 import { sendEmail } from "./email.mjs";
 import { saveEnquiry } from "./db.mjs";
+import { isGraphConfigured, sendGraphMail } from "./graph-mail.mjs";
 
 const MAX_BODY_BYTES = 64 * 1024; // a contact form has no business being larger
 
@@ -105,6 +106,7 @@ export async function handleContact(req, res) {
 
     let emailSent = false;
     let emailErrorMsg = null;
+    let emailProvider = null;
     const recipient = process.env.CONTACT_FORM_RECIPIENT_EMAIL;
     if (!recipient) {
       // Never send to nowhere — but this alone doesn't fail the request when
@@ -120,7 +122,11 @@ export async function handleContact(req, res) {
           message,
         ].filter((l) => l !== null);
 
-        await sendEmail({
+        // Microsoft Graph when its secrets exist (domain mail is on M365);
+        // otherwise the GoDaddy gateway.
+        emailProvider = isGraphConfigured() ? "graph" : "gateway";
+        const send = emailProvider === "graph" ? sendGraphMail : sendEmail;
+        await send({
           to: recipient,
           replyTo: email,
           subject: `Contact form: ${name}`,
@@ -140,7 +146,7 @@ export async function handleContact(req, res) {
     // fetch()/form submit in assets/js/main.js never sends.
     const debugRequested = req.headers["x-contact-debug"] === "archissance-diag-2026";
     const debug = debugRequested
-      ? { dbSaved, dbErrorMsg, emailSent, emailErrorMsg, recipientConfigured: !!recipient }
+      ? { dbSaved, dbErrorMsg, emailSent, emailErrorMsg, emailProvider, recipientConfigured: !!recipient }
       : undefined;
 
     if (dbSaved || emailSent) {
