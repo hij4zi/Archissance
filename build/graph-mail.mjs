@@ -26,6 +26,18 @@ export function graphEnvCheck() {
   return { present, lookalikes };
 }
 
+// The application roles (e.g. "Mail.Send") and app id Microsoft put in the
+// current access token — the claims are not secret, the signature is dropped.
+export function graphTokenInfo() {
+  if (!cachedToken) return null;
+  try {
+    const claims = JSON.parse(Buffer.from(cachedToken.value.split(".")[1], "base64url").toString("utf8"));
+    return { roles: claims.roles || [], appid: claims.appid, tid: claims.tid };
+  } catch {
+    return { error: "could not decode token" };
+  }
+}
+
 export function isGraphConfigured() {
   return Boolean(
     process.env.MS_TENANT_ID &&
@@ -99,7 +111,8 @@ export async function sendGraphMail({ to, replyTo, subject, text }) {
   if (res.status !== 202) {
     const body = await res.json().catch(() => ({}));
     if (res.status === 401) cachedToken = null;
-    throw new Error(`graph send failed: HTTP ${res.status} ${body?.error?.code || ""}`.trim());
+    const detail = String(body?.error?.message || "").slice(0, 300);
+    throw new Error(`graph send failed: HTTP ${res.status} ${body?.error?.code || ""} ${detail}`.trim());
   }
   return { provider: "graph" };
 }

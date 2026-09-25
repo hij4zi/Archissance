@@ -27,7 +27,7 @@
    outside the platform. */
 import { sendEmail } from "./email.mjs";
 import { saveEnquiry } from "./db.mjs";
-import { isGraphConfigured, sendGraphMail, graphEnvCheck } from "./graph-mail.mjs";
+import { isGraphConfigured, sendGraphMail, graphEnvCheck, graphTokenInfo } from "./graph-mail.mjs";
 
 const MAX_BODY_BYTES = 64 * 1024; // a contact form has no business being larger
 
@@ -146,7 +146,7 @@ export async function handleContact(req, res) {
     // fetch()/form submit in assets/js/main.js never sends.
     const debugRequested = req.headers["x-contact-debug"] === "archissance-diag-2026";
     const debug = debugRequested
-      ? { dbSaved, dbErrorMsg, emailSent, emailErrorMsg, emailProvider, recipientConfigured: !!recipient, graphEnv: graphEnvCheck() }
+      ? { dbSaved, dbErrorMsg, emailSent, emailErrorMsg, emailProvider, recipientConfigured: !!recipient, graphEnv: graphEnvCheck(), graphToken: graphTokenInfo() }
       : undefined;
 
     if (dbSaved || emailSent) {
