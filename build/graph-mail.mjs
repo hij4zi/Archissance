@@ -44,7 +44,10 @@ async function getToken() {
   );
   const body = await res.json().catch(() => ({}));
   if (!res.ok || !body.access_token) {
-    throw new Error(`graph token failed: HTTP ${res.status} ${body.error || ""}`.trim());
+    // Microsoft's error_description starts "AADSTSnnnnn: ..." — the code alone
+    // says which credential is wrong; the rest can contain ids, so drop it.
+    const code = /AADSTS\d+/.exec(body.error_description || "")?.[0] || "";
+    throw new Error(`graph token failed: HTTP ${res.status} ${body.error || ""} ${code}`.trim());
   }
   cachedToken = { value: body.access_token, expiresAt: Date.now() + (body.expires_in || 3600) * 1000 };
   return cachedToken.value;
